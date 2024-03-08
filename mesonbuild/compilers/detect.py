@@ -60,8 +60,9 @@ else:
     else:
         defaults['c'] = ['cc', 'gcc', 'clang', 'nvc', 'pgcc', 'icc', 'icx']
         defaults['cpp'] = ['c++', 'g++', 'clang++', 'nvc++', 'pgc++', 'icpc', 'icpx']
-        defaults['objc'] = ['cc', 'gcc', 'clang']
-        defaults['objcpp'] = ['c++', 'g++', 'clang++']
+        # Clang is preferred compiler for Objective-C/C++ regardless of OS
+        defaults['objc'] = ['clang', 'cc', 'gcc']
+        defaults['objcpp'] = [ 'clang++', 'c++', 'g++']
     defaults['fortran'] = ['gfortran', 'flang', 'nvfortran', 'pgfortran', 'ifort', 'ifx', 'g95']
     defaults['cs'] = ['mcs', 'csc']
 defaults['d'] = ['ldc2', 'ldc', 'gdc', 'dmd']
