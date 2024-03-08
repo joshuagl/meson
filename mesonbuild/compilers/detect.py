@@ -5,7 +5,8 @@ from __future__ import annotations
 
 from ..mesonlib import (
     MesonException, EnvironmentException, MachineChoice, join_args,
-    search_version, is_windows, Popen_safe, Popen_safe_logged, windows_proof_rm,
+    search_version, is_osx, is_windows, Popen_safe, Popen_safe_logged,
+    windows_proof_rm,
 )
 from ..envconfig import BinaryTable
 from .. import mlog
@@ -51,6 +52,13 @@ if is_windows():
     defaults['objc'] = ['cc', 'gcc']
     defaults['objcpp'] = ['c++', 'g++']
     defaults['cs'] = ['csc', 'mcs']
+elif is_osx():
+    defaults['c'] = ['clang', 'cc', 'gcc', 'nvc', 'pgcc', 'icc', 'icx']
+    defaults['cpp'] = ['clang++', 'c++', 'g++', 'nvc++', 'pgc++', 'icpc', 'icpx']
+    defaults['objc'] = ['clang', 'cc', 'gcc']
+    defaults['objcpp'] = [ 'clang++', 'c++', 'g++']
+    defaults['fortran'] = ['gfortran', 'flang', 'nvfortran', 'pgfortran', 'ifort', 'ifx', 'g95']
+    defaults['cs'] = ['mcs', 'csc']
 else:
     if platform.machine().lower() == 'e2k':
         defaults['c'] = ['cc', 'gcc', 'lcc', 'clang']
